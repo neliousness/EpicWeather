@@ -1,18 +1,38 @@
 # Code Challenge
 
-##
+## EpicWeather
 
-An Epic weather app developed by Nelio
+Epic weather is a minimalistic weather app that was developed as a coding challanging from WIT. 
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Displays an animated Splash screen
+- Shows the users current weather and the weather of 10 other European cities
+- Search field for searching by city name
+- Detailed information about each cities weather conditions including the daily forecast
+- Data refreshes when the user leaves the and returns to the app (Note not exiting or closing the app)
 
-A few resources to get you started if this is your first Flutter project:
+## The Process
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Design
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The app was first designed using Figma. During this phase 3 screens were created. 
+
+#### Splash Screen
+![alt text](https://neliolucas.dicemz.com/images/splash_screen.png)
+
+#### Main Screen
+![alt text](https://neliolucas.dicemz.com/images/main_screen.png)
+
+#### City Weather Details Screen
+![alt text](https://neliolucas.dicemz.com/images/city_details.png)
+
+
+### Development
+The app was developed using Flutter and flutter packages to faciliate and speed up Development
+
+### Development Duration
+The app took an estimated 18 hours to complete where 4 hours were dedicated to design and 14 development. 
+
+The app is available for download here [Link](https://neliolucas.dicemz.com)
+
