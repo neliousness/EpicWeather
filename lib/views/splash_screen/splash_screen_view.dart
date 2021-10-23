@@ -20,14 +20,12 @@ class SplashScreenView extends StatefulWidget {
 
 class _SplashScreenViewState extends State<SplashScreenView>
     with SingleTickerProviderStateMixin {
-  late Animation<double> animation;
-  late AnimationController controller;
-  var currentData;
-  var subscription;
+  late Animation<double> _animation;
+  late AnimationController _controller;
+  var _subscription;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     initAnimation();
     checkNetwork();
@@ -43,7 +41,7 @@ class _SplashScreenViewState extends State<SplashScreenView>
               child: SvgPicture.asset(
             "assets/svgs/cloud.svg",
             width: 150,
-            color: kAccentColor.withOpacity(animation.value),
+            color: kAccentColor.withOpacity(_animation.value),
           )),
           Align(
             alignment: Alignment.bottomCenter,
@@ -60,7 +58,14 @@ class _SplashScreenViewState extends State<SplashScreenView>
     );
   }
 
-  loadWeatherData() async {
+  @override
+  void dispose() {
+    _controller.dispose();
+    _subscription.cancel();
+    super.dispose();
+  }
+
+  void loadWeatherData() async {
     WeatherService service = WeatherService();
     dynamic weatherData = await service.fetchMultipleLocationWeather();
     if (weatherData != null) {
@@ -74,17 +79,17 @@ class _SplashScreenViewState extends State<SplashScreenView>
   }
 
   void initAnimation() {
-    controller =
+    _controller =
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
-    animation = Tween<double>(begin: 0.1, end: 0.9).animate(controller);
-    controller.repeat(reverse: true);
-    animation.addListener(() {
+    _animation = Tween<double>(begin: 0.1, end: 0.9).animate(_controller);
+    _controller.repeat(reverse: true);
+    _animation.addListener(() {
       setState(() {});
     });
   }
 
   void checkNetwork() {
-    subscription = Connectivity()
+    _subscription = Connectivity()
         .onConnectivityChanged
         .listen((ConnectivityResult result) async {
       if (result != ConnectivityResult.none) {
@@ -95,13 +100,5 @@ class _SplashScreenViewState extends State<SplashScreenView>
         }
       }
     });
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    controller.dispose();
-    subscription.cancel();
-    super.dispose();
   }
 }

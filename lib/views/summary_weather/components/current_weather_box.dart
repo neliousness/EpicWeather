@@ -18,41 +18,38 @@ class CurrentWeatherBox extends StatefulWidget {
 }
 
 class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
-  late double width;
-  late double height;
-  late dynamic currentCityWeather;
-
-  late int temp;
-  late int humidity;
-  late int realFeel;
-  late int wind;
-  late String city;
-  late String country;
-  late String condition;
+  late double _width;
+  late dynamic _currentCityWeather;
+  late int _temp;
+  late int _humidity;
+  late int _realFeel;
+  late int _wind;
+  late String _city;
+  late String _country;
+  late String _condition;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    init();
+    populateUI();
   }
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery.of(context).size.width;
+    _width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    DetailedWeatherView(cityWeather: currentCityWeather)));
+                    DetailedWeatherView(cityWeather: _currentCityWeather)));
       },
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Container(
             height: 150,
-            width: width,
+            width: _width,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -70,11 +67,11 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                             size: 16,
                           ),
                           Text(
-                            '$city, ',
+                            '$_city, ',
                             style: TextStyle(color: Colors.white, fontSize: 14),
                           ),
                           Text(
-                            '$country',
+                            '$_country',
                             style: TextStyle(
                                 color: kTextAccentColor.withOpacity(0.7),
                                 fontSize: 14),
@@ -85,9 +82,9 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Hero(
-                        tag: '$city',
+                        tag: '$_city',
                         child: SvgPicture.asset(
-                          "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
+                          "assets/svgs/${WeatherHelper.getWeatherAsset(_condition)}.svg",
                           width: 90,
                           color: kAccentColor,
                         ),
@@ -107,7 +104,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                         child: Stack(
                           children: [
                             Align(
-                              alignment: temperatureAlignment(temp, "circle"),
+                              alignment: temperatureAlignment(_temp, "circle"),
                               child: Container(
                                 width: 10,
                                 height: 10,
@@ -120,7 +117,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                             Align(
                               alignment: Alignment.center,
                               child: Text(
-                                '$temp',
+                                '$_temp',
                                 style: TextStyle(
                                     fontSize: 46,
                                     color: Colors.white,
@@ -128,7 +125,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                               ),
                             ),
                             Align(
-                              alignment: temperatureAlignment(temp, "unit"),
+                              alignment: temperatureAlignment(_temp, "unit"),
                               child: Text(
                                 'C',
                                 style: TextStyle(
@@ -155,7 +152,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                                 color: kAccentColor,
                               ),
                               Text(
-                                '$humidity%',
+                                '$_humidity%',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -179,7 +176,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                                 ),
                               ),
                               Text(
-                                '$realFeel',
+                                '$_realFeel',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -201,7 +198,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                                 ),
                               ),
                               Text(
-                                '$wind km/h',
+                                '$_wind km/h',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -224,15 +221,15 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
     );
   }
 
-  init() {
-    currentCityWeather = widget.currentCityWeather;
-    temp = currentCityWeather['current']['temp_c'].toInt();
-    wind = currentCityWeather['current']['wind_kph'].toInt();
-    realFeel = currentCityWeather['current']['feelslike_c'].toInt();
-    humidity = currentCityWeather['current']['humidity'].toInt();
-    city = currentCityWeather['location']['name'];
-    country = currentCityWeather['location']['country'];
-    condition = currentCityWeather['current']['condition']['text'];
+  void populateUI() {
+    _currentCityWeather = widget.currentCityWeather;
+    _temp = _currentCityWeather['current']['temp_c'].toInt();
+    _wind = _currentCityWeather['current']['wind_kph'].toInt();
+    _realFeel = _currentCityWeather['current']['feelslike_c'].toInt();
+    _humidity = _currentCityWeather['current']['humidity'].toInt();
+    _city = _currentCityWeather['location']['name'];
+    _country = _currentCityWeather['location']['country'];
+    _condition = _currentCityWeather['current']['condition']['text'];
   }
 
   Alignment temperatureAlignment(int temp, String mode) {

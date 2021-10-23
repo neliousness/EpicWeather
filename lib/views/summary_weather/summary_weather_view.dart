@@ -23,20 +23,20 @@ class SummaryWeatherView extends StatefulWidget {
 
 class _SummaryWeatherViewState extends State<SummaryWeatherView>
     with WidgetsBindingObserver, SingleTickerProviderStateMixin {
-  late Map weatherData;
-  late List<WeatherBox> weatherBoxes = [];
+  late Map _weatherData;
+  late List<WeatherBox> _weatherBoxes = [];
   late CurrentWeatherBox _currentWeatherBox;
-  late double width;
-  late double height;
-  late Animation<double> animation;
-  late AnimationController controller;
-  bool loading = false;
+  late double _width;
+  late double _height;
+  late Animation<double> _animation;
+  late AnimationController _controller;
+  bool _loading = false;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
-    weatherData = widget.weatherData;
+    _weatherData = widget.weatherData;
     populateMultipleCityWeather();
     initAnimation();
   }
@@ -50,16 +50,16 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery.of(context).size.width;
-    height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
+    _height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: ScrollConfiguration(
         behavior: NoGlowScroll(),
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Column(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
@@ -101,12 +101,12 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
                           height: MediaQuery.of(context).size.height,
                           child: GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
-                            itemCount: weatherBoxes.length,
+                            itemCount: _weatherBoxes.length,
                             gridDelegate:
                                 new SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2),
                             itemBuilder: (BuildContext context, int index) {
-                              return weatherBoxes[index];
+                              return _weatherBoxes[index];
                             },
                           ),
                         ),
@@ -115,24 +115,24 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
                   )
                 ],
               ),
-              Visibility(
-                visible: loading,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: width,
-                    height: height,
-                    color: kPrimaryColor.withOpacity(0.7),
-                    child: Icon(
-                      Icons.cloud_outlined,
-                      color: kTextAccentColor.withOpacity(animation.value),
-                      size: 60,
-                    ),
+            ),
+            Visibility(
+              visible: _loading,
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: _width,
+                  height: _height,
+                  color: kPrimaryColor.withOpacity(0.7),
+                  child: Icon(
+                    Icons.cloud_outlined,
+                    color: kTextAccentColor.withOpacity(_animation.value),
+                    size: 60,
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -145,10 +145,10 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
   }
 
   void populateMultipleCityWeather() {
-    weatherData.forEach((key, value) {
+    _weatherData.forEach((key, value) {
       if (key != kCurrentCityMapKey) {
         setState(() {
-          weatherBoxes.add(WeatherBox(
+          _weatherBoxes.add(WeatherBox(
             key: UniqueKey(),
             currentWeather: value,
           ));
@@ -157,7 +157,7 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
         setState(() {
           _currentWeatherBox = CurrentWeatherBox(
             key: UniqueKey(),
-            currentCityWeather: weatherData[kCurrentCityMapKey],
+            currentCityWeather: _weatherData[kCurrentCityMapKey],
           );
         });
       }
@@ -166,17 +166,17 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
 
   void filterCityList(String filter) {
     setState(() {
-      weatherBoxes.clear();
-      weatherData.forEach((key, value) {
+      _weatherBoxes.clear();
+      _weatherData.forEach((key, value) {
         if (key != kCurrentCityMapKey &&
             key.toLowerCase().contains(filter.toLowerCase()) &&
             filter.length > 0) {
-          weatherBoxes.add(WeatherBox(
+          _weatherBoxes.add(WeatherBox(
             key: UniqueKey(),
             currentWeather: value,
           ));
         } else if (key != kCurrentCityMapKey && filter.length == 0) {
-          weatherBoxes.add(WeatherBox(
+          _weatherBoxes.add(WeatherBox(
             key: UniqueKey(),
             currentWeather: value,
           ));
@@ -186,11 +186,11 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
   }
 
   void initAnimation() {
-    controller =
+    _controller =
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
-    animation = Tween<double>(begin: 0.1, end: 0.9).animate(controller);
-    controller.repeat(reverse: true);
-    animation.addListener(() {
+    _animation = Tween<double>(begin: 0.1, end: 0.9).animate(_controller);
+    _controller.repeat(reverse: true);
+    _animation.addListener(() {
       setState(() {});
     });
   }
@@ -205,14 +205,14 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
 
   void updateData() async {
     setState(() {
-      loading = true;
+      _loading = true;
     });
     WeatherService service = WeatherService();
-    weatherData = await service.fetchMultipleLocationWeather();
+    _weatherData = await service.fetchMultipleLocationWeather();
     setState(() {
-      weatherBoxes.clear();
+      _weatherBoxes.clear();
       populateMultipleCityWeather();
-      loading = false;
+      _loading = false;
     });
   }
 }

@@ -24,34 +24,33 @@ class DetailedWeatherView extends StatefulWidget {
 
 class _DetailedWeatherViewState extends State<DetailedWeatherView>
     with WidgetsBindingObserver, SingleTickerProviderStateMixin {
-  late double width;
-  late double height;
-  late dynamic cityWeather;
-  late String city;
-  late String country;
-  late int temp;
-  late int humidity;
-  late int wind;
-  late String asset;
-  late String condition;
-  late int pressure;
-  late int realFeel;
-  late int visibility;
-  late int uv;
-  late String sunrise;
-  late String sunset;
-  late int maxDayTemp;
-  late int minDayTemp;
+  late double _width;
+  late double _height;
+  late dynamic _cityWeather;
+  late String _city;
+  late String _country;
+  late int _temp;
+  late int _humidity;
+  late int _wind;
+  late String _asset;
+  late String _condition;
+  late int _pressure;
+  late int _realFeel;
+  late int _visibility;
+  late int _uv;
+  late String _sunrise;
+  late String _sunset;
+  late int _maxDayTemp;
+  late int _minDayTemp;
   late List<HourForecast> _hourForecasts = [];
-  bool loading = false;
-  late Animation<double> animation;
-  late AnimationController controller;
-  late String identifier;
+  bool _loading = false;
+  late Animation<double> _animation;
+  late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    cityWeather = widget.cityWeather;
+    _cityWeather = widget.cityWeather;
     WidgetsBinding.instance!.addObserver(this);
     populateUI();
     initAnimation();
@@ -66,16 +65,16 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery.of(context).size.width;
-    height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
+    _height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: kPrimaryColor,
       body: ScrollConfiguration(
         behavior: NoGlowScroll(),
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              Column(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   //back navigation
@@ -101,7 +100,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                   Padding(
                     padding: const EdgeInsets.only(top: 5.0),
                     child: SizedBox(
-                      height: height / 4.0,
+                      height: _height / 4.0,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -113,12 +112,12 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '$city',
+                                    '$_city',
                                     style: TextStyle(
                                         color: kLightTextColor, fontSize: 18),
                                   ),
                                   Text(
-                                    '$country',
+                                    '$_country',
                                     style: TextStyle(
                                         color:
                                             kTextAccentColor.withOpacity(0.7)),
@@ -135,7 +134,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                     children: [
                                       Align(
                                         alignment: temperatureAlignment(
-                                            temp, "circle"),
+                                            _temp, "circle"),
                                         child: Container(
                                           width: 10,
                                           height: 10,
@@ -148,10 +147,10 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                         ),
                                       ),
                                       Align(
-                                        alignment:
-                                            temperatureAlignment(temp, "value"),
+                                        alignment: temperatureAlignment(
+                                            _temp, "value"),
                                         child: Text(
-                                          '$temp',
+                                          '$_temp',
                                           style: TextStyle(
                                               fontSize: 56,
                                               color: Colors.white,
@@ -160,7 +159,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                       ),
                                       Align(
                                         alignment:
-                                            temperatureAlignment(temp, "unit"),
+                                            temperatureAlignment(_temp, "unit"),
                                         child: Text(
                                           'C',
                                           style: TextStyle(
@@ -179,7 +178,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                   padding: const EdgeInsets.only(
                                       left: 16.0, right: 16, top: 6, bottom: 6),
                                   child: Text(
-                                    '$condition',
+                                    '$_condition',
                                     style: TextStyle(
                                         color: kLightTextColor, fontSize: 16),
                                   ),
@@ -191,7 +190,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Min $minDayTemp - $maxDayTemp Max',
+                                  'Min $_minDayTemp - $_maxDayTemp Max',
                                   style: TextStyle(
                                       color: Color(0xffADCDFE).withOpacity(0.7),
                                       fontSize: 12),
@@ -203,9 +202,9 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Hero(
-                                tag: '$city',
+                                tag: '$_city',
                                 child: SvgPicture.asset(
-                                  "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
+                                  "assets/svgs/${WeatherHelper.getWeatherAsset(_condition)}.svg",
                                   width: 160,
                                   color: kAccentColor,
                                 ),
@@ -220,8 +219,8 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                   Padding(
                     padding: const EdgeInsets.only(top: 50.0),
                     child: SizedBox(
-                      width: width,
-                      height: height / 5.5,
+                      width: _width,
+                      height: _height / 5.5,
                       child: Stack(
                         children: [
                           Align(
@@ -237,7 +236,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    '$sunrise',
+                                    '$_sunrise',
                                     style: TextStyle(color: kLightTextColor),
                                   ),
                                 )
@@ -260,7 +259,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
-                                    '$sunset',
+                                    '$_sunset',
                                     style: TextStyle(color: kLightTextColor),
                                   ),
                                 )
@@ -284,17 +283,17 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                           children: [
                             ConditionBox(
                               asset: "preasure",
-                              value: '$pressure psi',
+                              value: '$_pressure psi',
                               description: "Pressure",
                             ),
                             ConditionBox(
                               asset: "rf",
-                              value: "$realFeel",
+                              value: "$_realFeel",
                               description: "Real Feel",
                             ),
                             ConditionBox(
                               asset: "water_drop",
-                              value: "$humidity%",
+                              value: "$_humidity%",
                               description: "Humidity",
                             ),
                           ],
@@ -305,17 +304,17 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                           children: [
                             ConditionBox(
                               asset: "visibility",
-                              value: "$visibility km",
+                              value: "$_visibility km",
                               description: "Visibility",
                             ),
                             ConditionBox(
                               asset: "sun",
-                              value: "$uv",
+                              value: "$_uv",
                               description: "UV",
                             ),
                             ConditionBox(
                               asset: "wind",
-                              value: "$wind km/h",
+                              value: "$_wind km/h",
                               description: "Wind",
                             )
                           ],
@@ -338,7 +337,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                           ),
                         ),
                         SizedBox(
-                          width: width,
+                          width: _width,
                           height: 120,
                           child: ScrollConfiguration(
                             behavior: NoGlowScroll(),
@@ -356,24 +355,24 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                   )
                 ],
               ),
-              Visibility(
-                visible: loading,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: width,
-                    height: height,
-                    color: kPrimaryColor.withOpacity(0.7),
-                    child: Icon(
-                      Icons.cloud_outlined,
-                      color: kTextAccentColor.withOpacity(animation.value),
-                      size: 60,
-                    ),
+            ),
+            Visibility(
+              visible: _loading,
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  width: _width,
+                  height: _height,
+                  color: kPrimaryColor.withOpacity(0.7),
+                  child: Icon(
+                    Icons.cloud_outlined,
+                    color: kTextAccentColor.withOpacity(_animation.value),
+                    size: 60,
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -382,27 +381,27 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
   @override
   void dispose() {
     WidgetsBinding.instance!.removeObserver(this);
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
-  populateUI() {
-    temp = cityWeather['current']['temp_c'].toInt();
-    wind = cityWeather['current']['wind_kph'].toInt();
-    humidity = cityWeather['current']['humidity'].toInt();
-    city = cityWeather['location']['name'];
-    country = cityWeather['location']['country'];
-    condition = cityWeather['current']['condition']['text'];
-    uv = cityWeather['current']['uv'].toInt();
-    pressure = cityWeather['current']['pressure_in'].toInt();
-    visibility = cityWeather['current']['vis_km'].toInt();
-    realFeel = cityWeather['current']['feelslike_c'].toInt();
-    sunrise = cityWeather['forecast']['forecastday'][0]['astro']['sunrise'];
-    sunset = cityWeather['forecast']['forecastday'][0]['astro']['sunset'];
-    maxDayTemp =
-        cityWeather['forecast']['forecastday'][0]['day']['maxtemp_c'].toInt();
-    minDayTemp =
-        cityWeather['forecast']['forecastday'][0]['day']['mintemp_c'].toInt();
+  void populateUI() {
+    _temp = _cityWeather['current']['temp_c'].toInt();
+    _wind = _cityWeather['current']['wind_kph'].toInt();
+    _humidity = _cityWeather['current']['humidity'].toInt();
+    _city = _cityWeather['location']['name'];
+    _country = _cityWeather['location']['country'];
+    _condition = _cityWeather['current']['condition']['text'];
+    _uv = _cityWeather['current']['uv'].toInt();
+    _pressure = _cityWeather['current']['pressure_in'].toInt();
+    _visibility = _cityWeather['current']['vis_km'].toInt();
+    _realFeel = _cityWeather['current']['feelslike_c'].toInt();
+    _sunrise = _cityWeather['forecast']['forecastday'][0]['astro']['sunrise'];
+    _sunset = _cityWeather['forecast']['forecastday'][0]['astro']['sunset'];
+    _maxDayTemp =
+        _cityWeather['forecast']['forecastday'][0]['day']['maxtemp_c'].toInt();
+    _minDayTemp =
+        _cityWeather['forecast']['forecastday'][0]['day']['mintemp_c'].toInt();
 
     populateHourForCasts();
   }
@@ -426,9 +425,9 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
     }
   }
 
-  populateHourForCasts() {
+  void populateHourForCasts() {
     dynamic hourForecastArray =
-        cityWeather['forecast']['forecastday'][0]['hour'];
+        _cityWeather['forecast']['forecastday'][0]['hour'];
     hourForecastArray.forEach((element) {
       _hourForecasts.add(HourForecast(
           key: UniqueKey(),
@@ -438,16 +437,16 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
     });
   }
 
-  updateData() async {
+  void updateData() async {
     setState(() {
-      loading = true;
+      _loading = true;
     });
     WeatherService service = WeatherService();
-    cityWeather = await service.fetchCityLocationWeather(city);
+    _cityWeather = await service.fetchCityLocationWeather(_city);
     setState(() {
       _hourForecasts.clear();
       populateUI();
-      loading = false;
+      _loading = false;
     });
   }
 
@@ -460,11 +459,11 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
   }
 
   void initAnimation() {
-    controller =
+    _controller =
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
-    animation = Tween<double>(begin: 0.1, end: 0.9).animate(controller);
-    controller.repeat(reverse: true);
-    animation.addListener(() {
+    _animation = Tween<double>(begin: 0.1, end: 0.9).animate(_controller);
+    _controller.repeat(reverse: true);
+    _animation.addListener(() {
       setState(() {});
     });
   }

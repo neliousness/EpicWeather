@@ -20,17 +20,17 @@ class HourForecast extends StatefulWidget {
 }
 
 class _HourForecastState extends State<HourForecast> {
-  late String asset;
-  late String time;
-  late String temp;
+  late String _asset;
+  late String _time;
+  late String _temp;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    asset = widget.asset;
-    time = widget.time;
-    temp = widget.temp;
+    _asset = widget.asset;
+    _time = widget.time;
+    _temp = widget.temp;
   }
 
   @override
@@ -44,19 +44,19 @@ class _HourForecastState extends State<HourForecast> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "${WeatherHelper.formatTime(time)}",
+              "${WeatherHelper.formatTime(_time)}",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: kTextAccentColor,
                   fontSize: 12),
             ),
             SvgPicture.asset(
-              "assets/svgs/$asset.svg",
+              "assets/svgs/$_asset.svg",
               width: 25,
               color: kTextAccentColor,
             ),
             Text(
-              "$temp",
+              "$_temp",
               style: TextStyle(
                   fontWeight: FontWeight.bold, color: kTextAccentColor),
             ),

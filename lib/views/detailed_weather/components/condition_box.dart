@@ -22,18 +22,17 @@ class ConditionBox extends StatefulWidget {
 }
 
 class _ConditionBoxState extends State<ConditionBox> {
-  late String asset;
-  late String value;
-  late String description;
+  late String _asset;
+  late String _value;
+  late String _description;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    asset = widget.asset;
-    value = widget.value;
-    description = widget.description;
+    _asset = widget.asset;
+    _value = widget.value;
+    _description = widget.description;
   }
 
   @override
@@ -47,19 +46,19 @@ class _ConditionBoxState extends State<ConditionBox> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              "assets/svgs/$asset.svg",
+              "assets/svgs/$_asset.svg",
               width: 25,
               color: kAccentColor,
             ),
             Padding(
               padding: const EdgeInsets.all(3.0),
               child: Text(
-                "$value",
+                "$_value",
                 style: TextStyle(color: Color(0xffADCDFE), fontSize: 16),
               ),
             ),
             Text(
-              "$description",
+              "$_description",
               style: TextStyle(
                   color: Color(0xffADCDFE).withOpacity(0.6), fontSize: 12),
             )

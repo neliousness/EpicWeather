@@ -4,6 +4,9 @@ import 'package:epic_weather/views/splash_screen/splash_screen_view.dart';
 import 'package:epic_weather/views/summary_weather/summary_weather_view.dart';
 import 'package:flutter/material.dart';
 
+/// Author Nelio Lucas
+/// Date 10/20/2021
+
 void main() {
   runApp(WeatherApp());
 }

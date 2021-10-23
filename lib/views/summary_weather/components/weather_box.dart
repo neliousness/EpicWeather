@@ -31,7 +31,6 @@ class _WeatherBoxState extends State<WeatherBox> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     init();
   }
@@ -90,7 +89,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                                     child: Text(
                                       '$temp',
                                       style: TextStyle(
-                                          fontSize: 42,
+                                          fontSize: 36,
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400),
                                     ),
@@ -201,7 +200,7 @@ class _WeatherBoxState extends State<WeatherBox> {
     );
   }
 
-  init() {
+  void init() {
     currentWeather = widget.currentWeather;
     temp = currentWeather['current']['temp_c'].toInt();
     wind = currentWeather['current']['wind_kph'].toInt();

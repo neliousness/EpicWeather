@@ -15,13 +15,12 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
-  late Function(String value) onChanged;
+  late Function(String value) _onChanged;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    onChanged = widget.onChanged;
+    _onChanged = widget.onChanged;
   }
 
   @override
@@ -37,7 +36,7 @@ class _SearchFieldState extends State<SearchField> {
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
           child: TextField(
             style: TextStyle(color: kLightTextColor),
-            onChanged: onChanged,
+            onChanged: _onChanged,
             decoration: InputDecoration(
               border: InputBorder.none,
               icon: Icon(
