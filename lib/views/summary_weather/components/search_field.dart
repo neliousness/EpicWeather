@@ -2,8 +2,12 @@ import 'package:epic_weather/util/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// Author Nelio Lucas
+/// Date 10/22/2021
+
 class SearchField extends StatefulWidget {
   final Function(String value) onChanged;
+
   SearchField({Key? key, required this.onChanged}) : super(key: key);
 
   @override

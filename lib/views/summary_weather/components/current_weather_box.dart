@@ -1,9 +1,12 @@
-import 'package:epic_weather/screens/city-weather-details.dart';
 import 'package:epic_weather/util/constants.dart';
 import 'package:epic_weather/util/weather-helper.dart';
+import 'package:epic_weather/views/detailed_weather/detailed_weather_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+/// Author Nelio Lucas
+/// Date 10/22/2021
 
 class CurrentWeatherBox extends StatefulWidget {
   final dynamic currentCityWeather;
@@ -42,7 +45,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CityWeatherDetails(
+                builder: (context) => DetailedWeatherView(
                       cityWeather: currentCityWeather,
                     )));
       },

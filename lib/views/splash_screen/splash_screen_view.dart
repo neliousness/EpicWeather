@@ -1,27 +1,29 @@
-import 'dart:io';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:epic_weather/screens/weather.dart';
-import 'package:epic_weather/service/weather-service.dart';
+import 'package:epic_weather/services/weather-service.dart';
 import 'package:epic_weather/util/constants.dart';
+import 'package:epic_weather/util/weather-helper.dart';
+import 'package:epic_weather/views/summary_weather/summary_weather_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Splash extends StatefulWidget {
+/// Author Nelio Lucas
+/// Date 10/20/2021
+
+class SplashScreenView extends StatefulWidget {
   static String id = "splash";
 
-  const Splash({Key? key}) : super(key: key);
+  const SplashScreenView({Key? key}) : super(key: key);
 
   @override
-  _SplashState createState() => _SplashState();
+  _SplashScreenViewState createState() => _SplashScreenViewState();
 }
 
-class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
+class _SplashScreenViewState extends State<SplashScreenView>
+    with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
   var currentData;
   var subscription;
-  var isDeviceConnected = false;
 
   @override
   void initState() {
@@ -29,7 +31,6 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     super.initState();
     initAnimation();
     checkNetwork();
-    loadWeatherData();
   }
 
   @override
@@ -60,19 +61,15 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   }
 
   loadWeatherData() async {
-    if (isDeviceConnected) {
-      WeatherService service = WeatherService();
-      dynamic weatherData = await service.fetchMultipleLocationWeather();
-      if (weatherData != null) {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Weather(
-                      weatherData: weatherData,
-                    )));
-      }
-    } else {
-      print('Unable to connect to internet');
+    WeatherService service = WeatherService();
+    dynamic weatherData = await service.fetchMultipleLocationWeather();
+    if (weatherData != null) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SummaryWeatherView(
+                    weatherData: weatherData,
+                  )));
     }
   }
 
@@ -91,26 +88,20 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         .onConnectivityChanged
         .listen((ConnectivityResult result) async {
       if (result != ConnectivityResult.none) {
-        isDeviceConnected = await hasNetwork();
-        setState(() {});
+        bool isDeviceConnected = await WeatherHelper.hasNetwork();
+        if (isDeviceConnected) {
+          print('Connected $isDeviceConnected');
+          loadWeatherData();
+        }
       }
     });
-  }
-
-  Future<bool> hasNetwork() async {
-    try {
-      final result = await InternetAddress.lookup('example.com');
-      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
-    } on SocketException catch (_) {
-      return false;
-    }
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     controller.dispose();
-    subscription.dispose();
+    subscription.cancel();
     super.dispose();
   }
 }

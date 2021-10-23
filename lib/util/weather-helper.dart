@@ -1,3 +1,8 @@
+import 'dart:io';
+
+/// Author Nelio Lucas
+/// Date 10/22/2021
+
 class WeatherHelper {
   static var europeanCountries = {
     'Lisbon',
@@ -11,6 +16,7 @@ class WeatherHelper {
     'Vienna',
     'Prague'
   };
+
   static String getWeatherAsset(String condition) {
     switch (condition.toLowerCase()) {
       case 'sunny':
@@ -118,6 +124,15 @@ class WeatherHelper {
     var timeArray = time.split(" ");
     var innerTimeArray = timeArray[1].split(":");
     return '${int.parse(innerTimeArray[0])}';
+  }
+
+  static Future<bool> hasNetwork() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      return false;
+    }
   }
 
   static String formatTime(String hour) {

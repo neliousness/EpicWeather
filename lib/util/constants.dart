@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Author Nelio Lucas
+/// Date 10/20/2021
+
 const Color kPrimaryColor = Color(0xff131D2C);
 const Color kAccentColor = Color(0xff5672A2);
 const Color kTextAccentColor = Color(0xffB7D8FF);

@@ -5,6 +5,9 @@ import 'package:epic_weather/util/constants.dart';
 import 'package:epic_weather/util/weather-helper.dart';
 import 'package:http/http.dart' as http;
 
+/// Author Nelio Lucas
+/// Date 10/20/2021
+
 class WeatherService {
   Future<dynamic> fetchCurrentLocationWeather() async {
     final ipv4 = await Ipify.ipv4();

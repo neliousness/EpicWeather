@@ -1,6 +1,7 @@
-import 'package:epic_weather/screens/splash.dart';
-import 'package:epic_weather/screens/weather.dart';
 import 'package:epic_weather/util/constants.dart';
+import 'package:epic_weather/views/detailed_weather/detailed_weather_view.dart';
+import 'package:epic_weather/views/splash_screen/splash_screen_view.dart';
+import 'package:epic_weather/views/summary_weather/summary_weather_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,11 +16,12 @@ class WeatherApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: Splash.id,
-      routes: {Splash.id : (context) => Splash(),
-        Weather.id : (context) => Weather()},
+      initialRoute: SplashScreenView.id,
+      routes: {
+        SplashScreenView.id: (context) => SplashScreenView(),
+        SummaryWeatherView.id: (context) => SummaryWeatherView(),
+        DetailedWeatherView.id: (context) => DetailedWeatherView()
+      },
     );
   }
 }
-
-
