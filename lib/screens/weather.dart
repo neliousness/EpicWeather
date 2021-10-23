@@ -16,13 +16,14 @@ class Weather extends StatefulWidget {
 }
 
 class _WeatherState extends State<Weather> {
-  dynamic weatherData;
+  late Map weatherData;
+  late List<WeatherBox> weatherBoxes = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    weatherData = widget.weatherData;
+    initMultipleCityWeather();
   }
 
   @override
@@ -35,7 +36,9 @@ class _WeatherState extends State<Weather> {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
-              child: SearchField(onChanged: (v) {}),
+              child: SearchField(onChanged: (v) {
+                filterCityList(v);
+              }),
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -50,7 +53,9 @@ class _WeatherState extends State<Weather> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            CurrentWeatherBox(),
+            CurrentWeatherBox(
+              currentCityWeather: weatherData[kcurrentCityKey],
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 left: 20.0,
@@ -62,22 +67,35 @@ class _WeatherState extends State<Weather> {
               ),
             ),
             Wrap(
-              children: [
-                WeatherBox(),
-                WeatherBox(),
-                WeatherBox(),
-                WeatherBox(),
-                WeatherBox(),
-                WeatherBox(),
-                WeatherBox(),
-                WeatherBox(),
-                WeatherBox(),
-                WeatherBox(),
-              ],
+              children: weatherBoxes,
             )
           ],
         ),
       ),
     );
+  }
+
+  initMultipleCityWeather() {
+    weatherData = widget.weatherData;
+    weatherData.forEach((key, value) {
+      if (key != kcurrentCityKey) {
+        setState(() {
+          weatherBoxes.add(WeatherBox(
+            key: UniqueKey(),
+            currentWeather: value,
+          ));
+        });
+      } else {
+        print('this weather $value');
+      }
+    });
+  }
+
+  void filterCityList(String filter) {
+    setState(() {
+      weatherBoxes.clear();
+      weatherBoxes.retainWhere((WeatherBox element) =>
+          '${element.currentWeather['location']['name']}'.contains(filter));
+    });
   }
 }

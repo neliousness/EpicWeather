@@ -2,7 +2,6 @@ import 'package:epic_weather/screens/weather.dart';
 import 'package:epic_weather/service/weather-service.dart';
 import 'package:epic_weather/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class Splash extends StatefulWidget {
@@ -37,7 +36,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
               child: SvgPicture.asset(
             "assets/svgs/cloud.svg",
             width: 150,
-            color: kAccentColor,
+            color: kAccentColor.withOpacity(animation.value),
           )),
           Align(
             alignment: Alignment.bottomCenter,
@@ -45,8 +44,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 'Developed by Nelio Lucas',
-                style:
-                    TextStyle(color: kAccentColor.withOpacity(animation.value)),
+                style: TextStyle(color: kAccentColor),
               ),
             ),
           )
@@ -57,17 +55,14 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
   loadWeatherData() async {
     WeatherService service = WeatherService();
-    dynamic currentWeatherData = await service.fetchCurrentLocationWeather();
-
-    if (currentWeatherData != null) {
-      SchedulerBinding.instance!.addPostFrameCallback((_) {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Weather(
-                      weatherData: currentWeatherData,
-                    )));
-      });
+    dynamic weatherData = await service.fetchMultipleLocationWeather();
+    if (weatherData != null) {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Weather(
+                    weatherData: weatherData,
+                  )));
     }
   }
 

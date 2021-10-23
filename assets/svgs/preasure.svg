@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+    <g id="_13864975771529659192" data-name="13864975771529659192" transform="translate(0 -0.005)">
+        <circle id="Ellipse_11" data-name="Ellipse 11" cx="9.5" cy="9.5" r="9.5" transform="translate(0.5 0.505)" fill="none" stroke="#adcdfe" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Path_11" data-name="Path 11" d="M12.8,11.957a1.641,1.641,0,1,1-2.321-2.321c.641-.641,6.674-4.35,6.674-4.35S13.447,11.316,12.8,11.957Z" transform="translate(-1.703 -0.86)" fill="none" stroke="#adcdfe" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <line id="Line_23" data-name="Line 23" x2="1.231" transform="translate(2.962 9.936)" fill="none" stroke="#adcdfe" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+        <line id="Line_24" data-name="Line 24" x2="0.87" y2="0.87" transform="translate(5.006 5.004)" fill="none" stroke="#adcdfe" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+        <line id="Line_25" data-name="Line 25" y2="1.231" transform="translate(9.938 2.96)" fill="none" stroke="#adcdfe" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+        <line id="Line_26" data-name="Line 26" x1="1.231" transform="translate(15.683 9.936)" fill="none" stroke="#adcdfe" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+        <path id="Path_12" data-name="Path 12" d="M17.537,19.133A12.071,12.071,0,0,0,10.452,17a12.071,12.071,0,0,0-7.085,2.134" transform="translate(-0.514 -2.96)" fill="none" stroke="#adcdfe" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1"/>
+    </g>
+</svg>

@@ -32,8 +32,10 @@ class _SearchFieldState extends State<SearchField> {
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
           child: TextField(
+            style: TextStyle(color: klightTextColor),
             onChanged: onChanged,
             decoration: InputDecoration(
+              border: InputBorder.none,
               icon: Icon(
                 Icons.search,
                 color: Color(0xff727C8D),

@@ -1,16 +1,13 @@
-<?xml version='1.0' encoding='utf-8'?>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
-  <g>
-    <g>
-      <path d="m64.5,92.6c15.5,0 28-12.6 28-28s-12.6-28-28-28-28,12.6-28,28 12.5,28 28,28zm0-47.9c11,0 19.9,8.9 19.9,19.9 0,11-8.9,19.9-19.9,19.9s-19.9-8.9-19.9-19.9c0-11 8.9-19.9 19.9-19.9z"/>
-      <path d="m68.6,23.6v-12.9c0-2.3-1.8-4.1-4.1-4.1s-4.1,1.8-4.1,4.1v12.9c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1z"/>
-      <path d="m60.4,105.6v12.9c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1v-12.9c0-2.3-1.8-4.1-4.1-4.1s-4.1,1.8-4.1,4.1z"/>
-      <path d="m96.4,38.5l9.1-9.1c1.6-1.6 1.6-4.2 0-5.8-1.6-1.6-4.2-1.6-5.8,0l-9.1,9.1c-1.6,1.6-1.6,4.2 0,5.8 0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2z"/>
-      <path d="m23.5,105.6c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l9.1-9.1c1.6-1.6 1.6-4.2 0-5.8-1.6-1.6-4.2-1.6-5.8,0l-9.1,9.1c-1.6,1.6-1.6,4.2 0,5.8z"/>
-      <path d="m122.5,64.6c0-2.3-1.8-4.1-4.1-4.1h-12.9c-2.3,0-4.1,1.8-4.1,4.1 0,2.3 1.8,4.1 4.1,4.1h12.9c2.2,1.42109e-14 4.1-1.8 4.1-4.1z"/>
-      <path d="m10.6,68.7h12.9c2.3,0 4.1-1.8 4.1-4.1 0-2.3-1.8-4.1-4.1-4.1h-12.9c-2.3,0-4.1,1.8-4.1,4.1 0,2.3 1.9,4.1 4.1,4.1z"/>
-      <path d="m102.6,106.8c1,0 2.1-0.4 2.9-1.2 1.6-1.6 1.6-4.2 0-5.8l-9.1-9.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l9.1,9.1c0.8,0.8 1.9,1.2 2.9,1.2z"/>
-      <path d="m38.4,38.5c1.6-1.6 1.6-4.2 0-5.8l-9.1-9.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l9.1,9.1c0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2z"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="142" height="142" viewBox="0 0 142 142">
+  <g id="_13676827261543238933" data-name="13676827261543238933" transform="translate(1.5 1.5)">
+    <circle id="Ellipse_3" data-name="Ellipse 3" cx="30.5" cy="30.5" r="30.5" transform="translate(39 39)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <line id="Line_1" data-name="Line 1" y2="13" transform="translate(72 1)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <line id="Line_2" data-name="Line 2" y2="13" transform="translate(72 125)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <line id="Line_3" data-name="Line 3" x2="8.843" y2="8.843" transform="translate(21.052 21.052)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <line id="Line_4" data-name="Line 4" x2="8.843" y2="8.843" transform="translate(109.105 109.105)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <line id="Line_5" data-name="Line 5" x2="13" transform="translate(1 72)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <line id="Line_6" data-name="Line 6" x2="13" transform="translate(125 72)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <line id="Line_7" data-name="Line 7" y1="8.843" x2="8.843" transform="translate(21.052 109.105)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+    <line id="Line_8" data-name="Line 8" y1="8.843" x2="8.843" transform="translate(109.105 21.052)" fill="none" stroke="#b7d8ff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
   </g>
 </svg>
