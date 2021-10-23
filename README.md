@@ -1,4 +1,4 @@
-# Code Challenge
+# WIT Code Challenge
 
 ## EpicWeather
 
