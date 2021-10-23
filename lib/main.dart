@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 /// Date 10/20/2021
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(WeatherApp());
 }
 
