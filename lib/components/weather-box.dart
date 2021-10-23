@@ -69,7 +69,8 @@ class _WeatherBoxState extends State<WeatherBox> {
                               child: Stack(
                                 children: [
                                   Align(
-                                    alignment: temperatureAlignment(temp),
+                                    alignment:
+                                        temperatureAlignment(temp, 'circle'),
                                     child: Container(
                                       width: 10,
                                       height: 10,
@@ -87,6 +88,17 @@ class _WeatherBoxState extends State<WeatherBox> {
                                       '$temp',
                                       style: TextStyle(
                                           fontSize: 42,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment:
+                                        temperatureAlignment(temp, 'unit'),
+                                    child: Text(
+                                      'C',
+                                      style: TextStyle(
+                                          fontSize: 22,
                                           color: Colors.white,
                                           fontWeight: FontWeight.w400),
                                     ),
@@ -216,10 +228,22 @@ class _WeatherBoxState extends State<WeatherBox> {
     );
   }
 
-  Alignment temperatureAlignment(int temp) {
-    if (temp < 10) {
-      return Alignment(0.5, 0);
+  Alignment temperatureAlignment(int temp, String mode) {
+    if (mode == "circle") {
+      if (temp < 10) {
+        return Alignment(0.4, 0);
+      }
+      return Alignment(1.5, -0.7);
+    } else if (mode == 'value') {
+      if (temp < 10) {
+        return Alignment(0, 0);
+      }
+      return Alignment(0, -0.7);
+    } else {
+      if (temp < 10) {
+        return Alignment(1.3, 0);
+      }
+      return Alignment(2.6, -0.5);
     }
-    return Alignment(1.5, -0.7);
   }
 }

@@ -59,16 +59,21 @@ class _CityWeatherDetailsState extends State<CityWeatherDetails> {
           mainAxisSize: MainAxisSize.max,
           children: [
             //back navigation
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0, top: 25, bottom: 5),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.arrow_back,
-                    size: 30,
-                    color: kAccentColor,
-                  )
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15.0, top: 25, bottom: 5),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                      color: kAccentColor,
+                    )
+                  ],
+                ),
               ),
             ),
             //weather degrees
@@ -105,7 +110,8 @@ class _CityWeatherDetailsState extends State<CityWeatherDetails> {
                             child: Stack(
                               children: [
                                 Align(
-                                  alignment: temperatureCircleAlignment(temp),
+                                  alignment:
+                                      temperatureAlignment(temp, "circle"),
                                   child: Container(
                                     width: 10,
                                     height: 10,
@@ -116,11 +122,22 @@ class _CityWeatherDetailsState extends State<CityWeatherDetails> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: temperatureValueAlignment(temp),
+                                  alignment:
+                                      temperatureAlignment(temp, "value"),
                                   child: Text(
                                     '$temp',
                                     style: TextStyle(
                                         fontSize: 56,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: temperatureAlignment(temp, "unit"),
+                                  child: Text(
+                                    'C',
+                                    style: TextStyle(
+                                        fontSize: 22,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -235,7 +252,7 @@ class _CityWeatherDetailsState extends State<CityWeatherDetails> {
                     children: [
                       ConditionBox(
                         asset: "preasure",
-                        value: '$pressure',
+                        value: '$pressure psi',
                         description: "Pressure",
                       ),
                       ConditionBox(
@@ -276,14 +293,26 @@ class _CityWeatherDetailsState extends State<CityWeatherDetails> {
             ),
             //week weather
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 0.0),
-              child: SizedBox(
-                width: width,
-                height: 120,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: _hourForcasts,
-                ),
+              padding: const EdgeInsets.only(top: 0.0, bottom: 0.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 2, left: 13),
+                    child: Text(
+                      'Hourly Forecast',
+                      style: TextStyle(color: klightTextColor, fontSize: 14),
+                    ),
+                  ),
+                  SizedBox(
+                    width: width,
+                    height: 120,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: _hourForcasts,
+                    ),
+                  ),
+                ],
               ),
             )
           ],
@@ -312,18 +341,23 @@ class _CityWeatherDetailsState extends State<CityWeatherDetails> {
         cityWeather['forecast']['forecastday'][0]['day']['mintemp_c'].toInt();
   }
 
-  Alignment temperatureCircleAlignment(int temp) {
-    if (temp < 10) {
-      return Alignment(0.6, 0);
+  Alignment temperatureAlignment(int temp, String mode) {
+    if (mode == "circle") {
+      if (temp < 10) {
+        return Alignment(0.7, 0);
+      }
+      return Alignment(1.2, -0.7);
+    } else if (mode == 'value') {
+      if (temp < 10) {
+        return Alignment(0, 0);
+      }
+      return Alignment(0, -0.7);
+    } else {
+      if (temp < 10) {
+        return Alignment(1.3, 0);
+      }
+      return Alignment(1.9, -0.5);
     }
-    return Alignment(1.2, -0.7);
-  }
-
-  Alignment temperatureValueAlignment(int temp) {
-    if (temp < 10) {
-      return Alignment(0, 0);
-    }
-    return Alignment(0, -0.7);
   }
 
   initHourForCasts() {
@@ -332,7 +366,7 @@ class _CityWeatherDetailsState extends State<CityWeatherDetails> {
     hourForcastArray.forEach((element) {
       _hourForcasts.add(HourForecast(
           asset: WeatherHelper.getWeatherAsset(element['condition']['text']),
-          hour: element['time'],
+          time: element['time'],
           temp: '${element['temp_c'].toInt()}'));
     });
   }

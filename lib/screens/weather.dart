@@ -66,8 +66,20 @@ class _WeatherState extends State<Weather> {
                 style: TextStyle(color: klightTextColor, fontSize: 18),
               ),
             ),
-            Wrap(
-              children: weatherBoxes,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: GridView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: weatherBoxes.length,
+                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (BuildContext context, int index) {
+                    return weatherBoxes[index];
+                  },
+                ),
+              ),
             )
           ],
         ),
@@ -94,8 +106,22 @@ class _WeatherState extends State<Weather> {
   void filterCityList(String filter) {
     setState(() {
       weatherBoxes.clear();
-      weatherBoxes.retainWhere((WeatherBox element) =>
-          '${element.currentWeather['location']['name']}'.contains(filter));
+      weatherData.forEach((key, value) {
+        if (key != kcurrentCityKey &&
+            key.toLowerCase().contains(filter.toLowerCase()) &&
+            filter.length > 0) {
+          weatherBoxes.add(WeatherBox(
+            key: UniqueKey(),
+            currentWeather: value,
+          ));
+        } else if (key != kcurrentCityKey && filter.length == 0) {
+          print('this weather $value');
+          weatherBoxes.add(WeatherBox(
+            key: UniqueKey(),
+            currentWeather: value,
+          ));
+        }
+      });
     });
   }
 }

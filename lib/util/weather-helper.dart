@@ -113,4 +113,65 @@ class WeatherHelper {
         return '';
     }
   }
+
+  static String _formatHours(String time) {
+    var timeArray = time.split(" ");
+    var innerTimeArray = timeArray[1].split(":");
+    return '${int.parse(innerTimeArray[0])}';
+  }
+
+  static String formatTime(String hour) {
+    switch (_formatHours(hour)) {
+      case '0':
+        return '12 AM';
+      case '1':
+        return '1 AM';
+      case '2':
+        return '2 AM';
+      case '3':
+        return '3 AM';
+      case '4':
+        return '4 AM';
+      case '5':
+        return '5 AM';
+      case '6':
+        return '6 AM';
+      case '7':
+        return '7 AM';
+      case '8':
+        return '8 AM';
+      case '9':
+        return '9 AM';
+      case '10':
+        return '10 AM';
+      case '11':
+        return '11 AM';
+      case '12':
+        return '12 PM';
+      case '13':
+        return '1 PM';
+      case '14':
+        return '2 PM';
+      case '15':
+        return '3 PM';
+      case '16':
+        return '4 PM';
+      case '17':
+        return '5 PM';
+      case '18':
+        return '6 PM';
+      case '19':
+        return '7 PM';
+      case '20':
+        return '8 PM';
+      case '21':
+        return '9 PM';
+      case '22':
+        return '10 PM';
+      case '23':
+        return '11 PM';
+      default:
+        return '';
+    }
+  }
 }

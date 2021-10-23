@@ -71,6 +71,9 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         AnimationController(duration: const Duration(seconds: 1), vsync: this);
     animation = Tween<double>(begin: 0.1, end: 0.9).animate(controller);
     controller.repeat(reverse: true);
+    animation.addListener(() {
+      setState(() {});
+    });
   }
 
   @override

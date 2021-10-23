@@ -79,10 +79,13 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                         ],
                       ),
                     ),
-                    SvgPicture.asset(
-                      "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
-                      width: 100,
-                      color: kAccentColor,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset(
+                        "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
+                        width: 90,
+                        color: kAccentColor,
+                      ),
                     )
                   ],
                 ),
@@ -98,10 +101,10 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                         child: Stack(
                           children: [
                             Align(
-                              alignment: Alignment(0.7, -0.7),
+                              alignment: temperatureAlignment(temp, "circle"),
                               child: Container(
-                                width: 15,
-                                height: 15,
+                                width: 10,
+                                height: 10,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(60),
                                     border: Border.all(
@@ -114,6 +117,16 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                                 '$temp',
                                 style: TextStyle(
                                     fontSize: 46,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                            Align(
+                              alignment: temperatureAlignment(temp, "unit"),
+                              child: Text(
+                                'C',
+                                style: TextStyle(
+                                    fontSize: 22,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -214,5 +227,24 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
     city = currentCityWeather['location']['name'];
     country = currentCityWeather['location']['country'];
     condition = currentCityWeather['current']['condition']['text'];
+  }
+
+  Alignment temperatureAlignment(int temp, String mode) {
+    if (mode == "circle") {
+      if (temp < 10) {
+        return Alignment(0.7, 0);
+      }
+      return Alignment(0.6, -0.55);
+    } else if (mode == 'value') {
+      if (temp < 10) {
+        return Alignment(0, 0);
+      }
+      return Alignment(0, -0.7);
+    } else {
+      if (temp < 10) {
+        return Alignment(1.3, 0);
+      }
+      return Alignment(1.1, -0.5);
+    }
   }
 }

@@ -1,13 +1,14 @@
 import 'package:epic_weather/util/constants.dart';
+import 'package:epic_weather/util/weather-helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HourForecast extends StatefulWidget {
   final String asset;
-  final String hour;
+  final String time;
   final String temp;
   const HourForecast(
-      {Key? key, required this.asset, required this.hour, required this.temp})
+      {Key? key, required this.asset, required this.time, required this.temp})
       : super(key: key);
 
   @override
@@ -16,7 +17,7 @@ class HourForecast extends StatefulWidget {
 
 class _HourForecastState extends State<HourForecast> {
   late String asset;
-  late String hour;
+  late String time;
   late String temp;
 
   @override
@@ -24,7 +25,7 @@ class _HourForecastState extends State<HourForecast> {
     // TODO: implement initState
     super.initState();
     asset = widget.asset;
-    hour = widget.hour;
+    time = widget.time;
     temp = widget.temp;
   }
 
@@ -39,9 +40,11 @@ class _HourForecastState extends State<HourForecast> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "${formatHours(hour)}",
+              "${WeatherHelper.formatTime(time)}",
               style: TextStyle(
-                  fontWeight: FontWeight.bold, color: kTextAccentColor),
+                  fontWeight: FontWeight.bold,
+                  color: kTextAccentColor,
+                  fontSize: 12),
             ),
             SvgPicture.asset(
               "assets/svgs/$asset.svg",
@@ -61,11 +64,5 @@ class _HourForecastState extends State<HourForecast> {
             borderRadius: BorderRadius.circular(25)),
       ),
     );
-  }
-
-  String formatHours(String time) {
-    var timeArray = time.split(" ");
-    var innerTimeArray = timeArray[1].split(":");
-    return '${int.parse(innerTimeArray[0])}';
   }
 }
