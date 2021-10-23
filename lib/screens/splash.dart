@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:epic_weather/screens/weather.dart';
 import 'package:epic_weather/service/weather-service.dart';
 import 'package:epic_weather/util/constants.dart';
@@ -17,12 +20,15 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
   var currentData;
+  var subscription;
+  var isDeviceConnected = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     initAnimation();
+    checkNetwork();
     loadWeatherData();
   }
 
@@ -54,15 +60,19 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   }
 
   loadWeatherData() async {
-    WeatherService service = WeatherService();
-    dynamic weatherData = await service.fetchMultipleLocationWeather();
-    if (weatherData != null) {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Weather(
-                    weatherData: weatherData,
-                  )));
+    if (isDeviceConnected) {
+      WeatherService service = WeatherService();
+      dynamic weatherData = await service.fetchMultipleLocationWeather();
+      if (weatherData != null) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Weather(
+                      weatherData: weatherData,
+                    )));
+      }
+    } else {
+      print('Unable to connect to internet');
     }
   }
 
@@ -76,10 +86,31 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     });
   }
 
+  void checkNetwork() {
+    subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) async {
+      if (result != ConnectivityResult.none) {
+        isDeviceConnected = await hasNetwork();
+        setState(() {});
+      }
+    });
+  }
+
+  Future<bool> hasNetwork() async {
+    try {
+      final result = await InternetAddress.lookup('example.com');
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
     controller.dispose();
+    subscription.dispose();
     super.dispose();
   }
 }

@@ -113,7 +113,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '$city, ',
+                                  '$city',
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 14),
                                 ),
@@ -213,18 +213,20 @@ class _WeatherBoxState extends State<WeatherBox> {
         children: [
           Text(
             '${nameArray[0]}',
-            style: TextStyle(color: kfadeTextColor, fontSize: 14),
+            style: TextStyle(
+                color: kTextAccentColor.withOpacity(0.7), fontSize: 14),
           ),
           Text(
             '${nameArray[1]}',
-            style: TextStyle(color: kfadeTextColor, fontSize: 14),
+            style: TextStyle(
+                color: kTextAccentColor.withOpacity(0.7), fontSize: 14),
           )
         ],
       );
     }
     return Text(
       '$name',
-      style: TextStyle(color: kfadeTextColor, fontSize: 14),
+      style: TextStyle(color: kTextAccentColor.withOpacity(0.7), fontSize: 14),
     );
   }
 

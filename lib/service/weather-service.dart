@@ -31,4 +31,12 @@ class WeatherService {
     citiesMap['$kcurrentCityKey'] = currentLocation;
     return citiesMap;
   }
+
+  Future<dynamic> fetchCityLocationWeather(String city) async {
+    var currentWeatherUrl = Uri.parse(
+        "http://api.weatherapi.com/v1/forecast.json?key=$kWeatherApiKey&q=$city&aqi=no");
+    var currentWeatherResponse = await http.get(currentWeatherUrl);
+
+    return jsonDecode(currentWeatherResponse.body);
+  }
 }

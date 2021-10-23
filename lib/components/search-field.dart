@@ -27,7 +27,7 @@ class _SearchFieldState extends State<SearchField> {
           const EdgeInsets.only(left: 18.0, right: 18, top: 12.0, bottom: 12.0),
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(color: kAccentColor, width: 2),
+            border: Border.all(color: kAccentColor, width: 1),
             borderRadius: BorderRadius.circular(32)),
         child: Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -42,7 +42,7 @@ class _SearchFieldState extends State<SearchField> {
               ),
               fillColor: kPrimaryColor,
               hintStyle: TextStyle(color: Color(0xff727C8D)),
-              hintText: 'Search Place',
+              hintText: 'Search cities',
             ),
           ),
         ),

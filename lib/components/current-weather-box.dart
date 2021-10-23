@@ -8,8 +8,7 @@ import 'package:flutter_svg/svg.dart';
 class CurrentWeatherBox extends StatefulWidget {
   final dynamic currentCityWeather;
 
-  const CurrentWeatherBox({Key? key, this.currentCityWeather})
-      : super(key: key);
+  CurrentWeatherBox({Key? key, this.currentCityWeather}) : super(key: key);
 
   @override
   _CurrentWeatherBoxState createState() => _CurrentWeatherBoxState();
@@ -32,7 +31,6 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
     init();
   }
 
@@ -49,7 +47,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                     )));
       },
       child: Padding(
-        padding: const EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(12.0),
         child: Container(
             height: 150,
             width: width,
@@ -60,21 +58,24 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 16.0, left: 16.0),
+                      padding: const EdgeInsets.only(top: 16.0, left: 14.0),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(
                             Icons.location_on,
                             color: Colors.white,
-                            size: 20,
+                            size: 16,
                           ),
                           Text(
                             '$city, ',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.white, fontSize: 14),
                           ),
                           Text(
                             '$country',
-                            style: TextStyle(color: kfadeTextColor),
+                            style: TextStyle(
+                                color: kTextAccentColor.withOpacity(0.7),
+                                fontSize: 14),
                           )
                         ],
                       ),
@@ -232,7 +233,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
   Alignment temperatureAlignment(int temp, String mode) {
     if (mode == "circle") {
       if (temp < 10) {
-        return Alignment(0.7, 0);
+        return Alignment(0.5, -0.5);
       }
       return Alignment(0.6, -0.55);
     } else if (mode == 'value') {
@@ -242,7 +243,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
       return Alignment(0, -0.7);
     } else {
       if (temp < 10) {
-        return Alignment(1.3, 0);
+        return Alignment(1.0, -0.3);
       }
       return Alignment(1.1, -0.5);
     }
