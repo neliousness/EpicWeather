@@ -81,7 +81,7 @@ class _WeatherBoxState extends State<WeatherBox> {
                                           borderRadius:
                                               BorderRadius.circular(60),
                                           border: Border.all(
-                                              color: klightTextColor,
+                                              color: kLightTextColor,
                                               width: 3)),
                                     ),
                                   ),
@@ -130,10 +130,13 @@ class _WeatherBoxState extends State<WeatherBox> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(4.0),
-                            child: SvgPicture.asset(
-                              "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
-                              width: 50,
-                              color: kAccentColor,
+                            child: Hero(
+                              tag: '$city',
+                              child: SvgPicture.asset(
+                                "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
+                                width: 50,
+                                color: kAccentColor,
+                              ),
                             ),
                           ),
                         ],

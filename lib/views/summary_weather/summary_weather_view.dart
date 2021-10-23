@@ -76,7 +76,7 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
                     child: Text(
                       "Current Location",
                       style: TextStyle(
-                          color: klightTextColor,
+                          color: kLightTextColor,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
@@ -92,7 +92,7 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
                         child: Text(
                           "Other cities",
                           style:
-                              TextStyle(color: klightTextColor, fontSize: 18),
+                              TextStyle(color: kLightTextColor, fontSize: 18),
                         ),
                       ),
                       Padding(
@@ -146,7 +146,7 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
 
   void populateMultipleCityWeather() {
     weatherData.forEach((key, value) {
-      if (key != kcurrentCityKey) {
+      if (key != kCurrentCityMapKey) {
         setState(() {
           weatherBoxes.add(WeatherBox(
             key: UniqueKey(),
@@ -157,7 +157,7 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
         setState(() {
           _currentWeatherBox = CurrentWeatherBox(
             key: UniqueKey(),
-            currentCityWeather: weatherData[kcurrentCityKey],
+            currentCityWeather: weatherData[kCurrentCityMapKey],
           );
         });
       }
@@ -168,14 +168,14 @@ class _SummaryWeatherViewState extends State<SummaryWeatherView>
     setState(() {
       weatherBoxes.clear();
       weatherData.forEach((key, value) {
-        if (key != kcurrentCityKey &&
+        if (key != kCurrentCityMapKey &&
             key.toLowerCase().contains(filter.toLowerCase()) &&
             filter.length > 0) {
           weatherBoxes.add(WeatherBox(
             key: UniqueKey(),
             currentWeather: value,
           ));
-        } else if (key != kcurrentCityKey && filter.length == 0) {
+        } else if (key != kCurrentCityMapKey && filter.length == 0) {
           weatherBoxes.add(WeatherBox(
             key: UniqueKey(),
             currentWeather: value,

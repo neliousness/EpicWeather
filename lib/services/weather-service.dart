@@ -31,7 +31,7 @@ class WeatherService {
       citiesMap['$element'] = jsonDecode(currentWeatherResponse.body);
     });
     dynamic currentLocation = await fetchCurrentLocationWeather();
-    citiesMap['$kcurrentCityKey'] = currentLocation;
+    citiesMap['$kCurrentCityMapKey'] = currentLocation;
     return citiesMap;
   }
 

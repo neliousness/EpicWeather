@@ -45,9 +45,8 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DetailedWeatherView(
-                      cityWeather: currentCityWeather,
-                    )));
+                builder: (context) =>
+                    DetailedWeatherView(cityWeather: currentCityWeather)));
       },
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -85,10 +84,13 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: SvgPicture.asset(
-                        "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
-                        width: 90,
-                        color: kAccentColor,
+                      child: Hero(
+                        tag: '$city',
+                        child: SvgPicture.asset(
+                          "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
+                          width: 90,
+                          color: kAccentColor,
+                        ),
                       ),
                     )
                   ],
@@ -112,7 +114,7 @@ class _CurrentWeatherBoxState extends State<CurrentWeatherBox> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(60),
                                     border: Border.all(
-                                        color: klightTextColor, width: 3)),
+                                        color: kLightTextColor, width: 3)),
                               ),
                             ),
                             Align(

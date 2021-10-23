@@ -46,6 +46,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
   bool loading = false;
   late Animation<double> animation;
   late AnimationController controller;
+  late String identifier;
 
   @override
   void initState() {
@@ -114,7 +115,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                   Text(
                                     '$city',
                                     style: TextStyle(
-                                        color: klightTextColor, fontSize: 18),
+                                        color: kLightTextColor, fontSize: 18),
                                   ),
                                   Text(
                                     '$country',
@@ -142,7 +143,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                               borderRadius:
                                                   BorderRadius.circular(60),
                                               border: Border.all(
-                                                  color: klightTextColor,
+                                                  color: kLightTextColor,
                                                   width: 3)),
                                         ),
                                       ),
@@ -180,7 +181,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                   child: Text(
                                     '$condition',
                                     style: TextStyle(
-                                        color: klightTextColor, fontSize: 16),
+                                        color: kLightTextColor, fontSize: 16),
                                   ),
                                 ),
                                 decoration: BoxDecoration(
@@ -201,10 +202,13 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                           Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              SvgPicture.asset(
-                                "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
-                                width: 160,
-                                color: kAccentColor,
+                              Hero(
+                                tag: '$city',
+                                child: SvgPicture.asset(
+                                  "assets/svgs/${WeatherHelper.getWeatherAsset(condition)}.svg",
+                                  width: 160,
+                                  color: kAccentColor,
+                                ),
                               )
                             ],
                           )
@@ -234,7 +238,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     '$sunrise',
-                                    style: TextStyle(color: klightTextColor),
+                                    style: TextStyle(color: kLightTextColor),
                                   ),
                                 )
                               ],
@@ -257,7 +261,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     '$sunset',
-                                    style: TextStyle(color: klightTextColor),
+                                    style: TextStyle(color: kLightTextColor),
                                   ),
                                 )
                               ],
@@ -330,7 +334,7 @@ class _DetailedWeatherViewState extends State<DetailedWeatherView>
                           child: Text(
                             'Hourly Forecast',
                             style:
-                                TextStyle(color: klightTextColor, fontSize: 14),
+                                TextStyle(color: kLightTextColor, fontSize: 14),
                           ),
                         ),
                         SizedBox(
