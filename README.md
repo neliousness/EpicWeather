@@ -19,13 +19,13 @@ Epic weather is a minimalistic weather app that was developed as a coding challa
 The app was first designed using Figma. During this phase 3 screens were created. 
 
 #### Splash Screen
-![alt text](https://neliolucas.dicemz.com/images/splash_screen.png)
+![alt text](https://codechallenge.dicemz.com/images/splash_screen.png)
 
 #### Main Screen
-![alt text](https://neliolucas.dicemz.com/images/main_screen.png)
+![alt text](https://codechallenge.dicemz.com/images/main_screen.png)
 
 #### City Weather Details Screen
-![alt text](https://neliolucas.dicemz.com/images/city_details.png)
+![alt text](https://codechallenge.dicemz.com/images/city_details.png)
 
 
 ### Development
