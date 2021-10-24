@@ -34,5 +34,5 @@ The app was developed using Flutter and flutter packages to faciliate and speed 
 ### Development Duration
 The app took an estimated 18 hours to complete where 4 hours were dedicated to design and 14 development. 
 
-The app is available for download here [Link](https://neliolucas.dicemz.com)
+The app is available for download here [Link](https://codechallenge.dicemz.com)
 
