@@ -2,7 +2,7 @@
 
 ## EpicWeather
 
-Epic weather is a minimalistic weather app that was developed as a coding challanging from WIT. 
+Epic weather is a minimalistic weather app that was developed as a coding challenge from WIT. 
 
 ## Features
 
