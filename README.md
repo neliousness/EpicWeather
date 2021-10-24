@@ -1,8 +1,8 @@
-# Code Challenge
+# WIT Code Challenge
 
 ## EpicWeather
 
-Epic weather is a minimalistic weather app that was developed as a coding challanging from WIT. 
+Epic weather is a minimalistic weather app that was developed as a coding challenge from WIT. 
 
 ## Features
 
@@ -16,7 +16,7 @@ Epic weather is a minimalistic weather app that was developed as a coding challa
 
 ### Design
 
-The app was first designed using Figma. During this phase 3 screens were created. 
+The app was first designed using Adobe XD. During this phase 3 screens were created. 
 
 #### Splash Screen
 ![alt text](https://codechallenge.dicemz.com/images/splash_screen.png)
@@ -34,5 +34,5 @@ The app was developed using Flutter and flutter packages to faciliate and speed 
 ### Development Duration
 The app took an estimated 18 hours to complete where 4 hours were dedicated to design and 14 development. 
 
-The app is available for download here [Link](https://neliolucas.dicemz.com)
+The app is available for download here [Link](https://codechallenge.dicemz.com)
 
